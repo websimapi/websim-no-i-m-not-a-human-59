@@ -47,7 +47,7 @@ function buildBarn(){
   const group = new THREE.Group();
   const body = new THREE.Mesh(
     new THREE.BoxGeometry(8,5,10),
-    new THREE.MeshStandardMaterial({ color: 0x5b0a0a, roughness:0.9, metalness:0.0 })
+    new THREE.MeshStandardMaterial({ color: 0x8b1010, roughness:0.85, metalness:0.0 })
   );
   body.position.y = 2.5; group.add(body);
 
@@ -59,7 +59,7 @@ function buildBarn(){
   roofR.position.set(0,5.5,0); roofR.rotation.z = -Math.PI/6; group.add(roofR);
 
   const door = new THREE.Mesh(new THREE.BoxGeometry(2.5,3.2,0.2),
-    new THREE.MeshStandardMaterial({ color: 0x3a0707, roughness:0.8 }));
+    new THREE.MeshStandardMaterial({ color: 0x5a0c0c, roughness:0.8 }));
   door.position.set(0,1.6,5.11); group.add(door);
 
   return group;
@@ -72,19 +72,20 @@ function init(){
   container.appendChild(renderer.domElement);
 
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x050805);
-  scene.fog = new THREE.FogExp2(0x050805, 0.035);
+  scene.background = new THREE.Color(0x0a120a);
+  scene.fog = new THREE.FogExp2(0x0a120a, 0.01);
 
   camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 200);
   camera.position.set(0, 1.7, 6.5);
 
-  const hemi = new THREE.HemisphereLight(0x445544, 0x101010, 0.7);
+  const hemi = new THREE.HemisphereLight(0x889988, 0x101010, 1.0);
   scene.add(hemi);
-  const dir = new THREE.DirectionalLight(0x999999, 0.4); dir.position.set(-3,6,2); scene.add(dir);
+  const dir = new THREE.DirectionalLight(0x999999, 0.9); dir.position.set(-3,6,2); scene.add(dir);
+  const amb = new THREE.AmbientLight(0xffffff, 0.2); scene.add(amb);
 
   const ground = new THREE.Mesh(
     new THREE.PlaneGeometry(200,200,64,64),
-    new THREE.MeshStandardMaterial({ color:0x1a2a1a, roughness:1.0, metalness:0 })
+    new THREE.MeshStandardMaterial({ color:0x2a3a2a, roughness:1.0, metalness:0 })
   );
   ground.rotation.x = -Math.PI/2; scene.add(ground);
 
@@ -106,7 +107,7 @@ function init(){
 
   composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
-  const post = new ShaderPass(makePostShader()); composer.addPass(post);
+  const post = new ShaderPass(makePostShader()); composer.addPass(post); composer.setSize(innerWidth, innerHeight);
 
   window.addEventListener('resize', ()=>{
     camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
@@ -134,4 +135,3 @@ export function start3DScene(){
   if (!running) { init(); }
   el.style.display='block'; el.removeAttribute('aria-hidden');
 }
-
