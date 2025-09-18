@@ -8,6 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://esm.sh/three@0.160.0",
+        "three/addons/": "https://esm.sh/three@0.160.0/examples/jsm/"
+      }
+    }
+    </script>
 </head>
 <body>
     <div id="loading-overlay">
@@ -112,15 +120,6 @@
     </div>
     <a href="https://store.steampowered.com/app/3180070/No_Im_not_a_Human/" target="_blank" class="credits-btn" aria-label="Original Inspired By — Trioskaz' No, I'm Not A Human" data-tooltip="Original Inspired By&#10;Trioskaz' No, I'm Not A Human">!</a>
     <script type="module" src="script.js"></script>
-    <!-- import map for three.js and addons -->
-    <script type="importmap">
-    {
-      "imports": {
-        "three": "https://esm.sh/three@0.160.0",
-        "three/addons/": "https://esm.sh/three@0.160.0/examples/jsm/"
-      }
-    }
-    </script>
     <button id="audio-unlock" class="audio-unlock" hidden>Enable Audio</button>
     <div class="ui-overlay" id="ui-overlay" aria-modal="true" role="dialog">
         <div class="overlay-inner">
